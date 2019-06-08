@@ -23,6 +23,7 @@ Plugin 'ryanoasis/vim-devicons'
 Plugin 'git://github.com/petRUShka/vim-opencl.git'
 Plugin 'ConradIrwin/vim-bracketed-paste'
 Plugin 'vim-syntastic/syntastic'
+Plugin 'scrooloose/nerdcommenter'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -40,7 +41,7 @@ set incsearch
 set ignorecase
 set smartcase
 set backspace=2
-set autoindent
+set noautoindent
 set formatoptions=c,q,r,t
 set ruler
 set lazyredraw
@@ -88,6 +89,7 @@ endif
 
 " Syntastic settings
 let g:syntastic_python_checkers = ['pycodestyle']
+" let g:syntastic_python_checkers = ['pylint']
 
 " Airline settings
 "set laststatus=2

@@ -116,5 +116,7 @@ if ! shopt -oq posix; then
 fi
 
 # Environment variables
+export EDITOR=vim
+export VISUAL=vim
 export DISPLAY="localhost:0.0"
-export WIN="/mnt/c/Users/rgw91937"
+export WIN="/mnt/c/Users/sergiesg"
