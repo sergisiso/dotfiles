@@ -3,30 +3,29 @@
 " $ sudo apt get install exuberant-ctags
 " $ mkdir -p $HOME/.vim/undo
 
-
 set clipboard=exclude:.*
 set encoding=utf8
 set nocompatible
 filetype off
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+" set the runtime path to include fzf and vim-plug
+set rtp+=~/.fzf
+call plug#begin('~/.vim/plugged')
 
-Plugin 'scrooloose/nerdtree'
-Plugin 'majutsushi/tagbar'
-"Plugin 'vim-airline/vim-airline'
-Plugin 'ctrlpvim/ctrlp.vim'
-"Plugin 'chriskempson/base16-vim'
-Plugin 'ryanoasis/vim-devicons'
-"Plugin 'Valloric/YouCompleteMe'
-Plugin 'git://github.com/petRUShka/vim-opencl.git'
-Plugin 'ConradIrwin/vim-bracketed-paste'
-Plugin 'vim-syntastic/syntastic'
-Plugin 'scrooloose/nerdcommenter'
+Plug 'dense-analysis/ale'
+Plug 'itchyny/lightline.vim'
+Plug 'junegunn/fzf.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'natebosch/vim-lsc'
+Plug 'liuchengxu/vista.vim'
+Plug 'ryanoasis/vim-devicons'
+Plug 'git://github.com/petRUShka/vim-opencl.git'
+Plug 'ConradIrwin/vim-bracketed-paste'
+"Plugin 'vim-syntastic/syntastic'
+Plug 'scrooloose/nerdcommenter'
 
 " All of your Plugins must be added before the following line
-call vundle#end()            " required
+call plug#end()            " required
 filetype plugin indent on    " required
 
 set tabstop=4
@@ -48,9 +47,9 @@ set lazyredraw
 set rnu
 set cursorline
 " set cursorcolumn
-set ttyfast
+" set ttyfast
 
-"hi CursorLine cterm=NONE ctermbg=59
+" hi CursorLine cterm=NONE ctermbg=59
 " hi CursorColumn cterm=NONE ctermbg=59
 filetype plugin on
 syntax on
@@ -58,7 +57,7 @@ syntax on
 " NerdTree and TagBar settings
 map <C-n> :NERDTreeToggle<CR>
 let g:NERDTreeDirArrows=1
-noremap <C-t> :TagbarToggle<CR>
+nnoremap <C-t> :Vista!!<CR>
 
 " Pane navigation mappings
 nnoremap J <C-W>j
@@ -77,9 +76,9 @@ if has("autocmd")
       au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 
-" CtrlP settings
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlPMixed'
+" fzf settings
+nnoremap <C-p> :Files<Cr>
+nnoremap <C-y> :Vista finder<Cr>
 
 " Remember last changes
 if has('persistent_undo')      "check if your vim version supports it
@@ -88,10 +87,15 @@ if has('persistent_undo')      "check if your vim version supports it
 endif
 
 " Syntastic settings
-let g:syntastic_python_checkers = ['pycodestyle']
-" let g:syntastic_python_checkers = ['pylint']
+" let g:syntastic_python_checkers = ['pycodestyle']
+let g:syntastic_python_checkers = ['pylint']
 
-" Airline settings
-"set laststatus=2
-"let g:airline_powerline_fonts = 1
-"let g:airline#extensions#tabline#enabled = 1
+" Lightline settings
+set laststatus=2
+let g:lightline = {
+      \ 'colorscheme': 'jellybeans',
+      \ }
+
+" ALE
+let g:ale_linters = {'python': ['pycodestyle']}
+" let g:ale_linters = {'python': ['plint']}

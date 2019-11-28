@@ -120,3 +120,5 @@ export EDITOR=vim
 export VISUAL=vim
 export DISPLAY="localhost:0.0"
 export WIN="/mnt/c/Users/sergiesg"
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
