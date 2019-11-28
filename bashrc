@@ -102,7 +102,7 @@ export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quo
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
-alias httpserver='python -m SimpleHTTPServer 8000'
+alias httpserver='/usr/bin/python -m SimpleHTTPServer 8000'
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile

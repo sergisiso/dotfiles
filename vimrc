@@ -86,10 +86,6 @@ if has('persistent_undo')      "check if your vim version supports it
     set undodir=$HOME/.vim/undo  "directory where the undo files will be stored
 endif
 
-" Syntastic settings
-" let g:syntastic_python_checkers = ['pycodestyle']
-let g:syntastic_python_checkers = ['pylint']
-
 " Lightline settings
 set laststatus=2
 let g:lightline = {
