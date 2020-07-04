@@ -50,6 +50,8 @@ set cursorline
 " set cursorcolumn
 set ttyfast
 
+au BufNewFile,BufRead *.rg set filetype=regent
+
 "hi CursorLine cterm=NONE ctermbg=59
 " hi CursorColumn cterm=NONE ctermbg=59
 filetype plugin on
