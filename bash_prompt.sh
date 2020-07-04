@@ -83,6 +83,9 @@ function set_hostname () {
   if [ "$PROMPT_HOSTNAME" == "DLHRT0023" ]; then
       PROMPT_HOSTNAME="laptop"
   fi
+  if [ "$PROMPT_HOSTNAME" == "DESKTOP-KH3SADP" ]; then
+      PROMPT_HOSTNAME="desktop"
+  fi
 
   PROMPT_HOSTNAME="${GREEN}${PROMPT_HOSTNAME}${COLOR_NONE} "
 }

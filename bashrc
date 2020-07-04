@@ -57,7 +57,6 @@ esac
 # off by default to not distract the user: the focus in a terminal window
 # should be on the output of commands, not on the prompt
 #force_color_prompt=yes
-
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
 	# We have color support; assume it's compliant with Ecma-48
@@ -80,7 +79,7 @@ unset color_prompt force_color_prompt
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
 xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\h \a\]$PS1"
+    PS1="\[\e]0;${debian_chroot:+($debian_chroot)} \a\]$PS1"
     ;;
 *)
     ;;
@@ -120,3 +119,5 @@ export EDITOR=vim
 export VISUAL=vim
 export DISPLAY="localhost:0.0"
 export WIN="/mnt/c/Users/sergiesg"
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

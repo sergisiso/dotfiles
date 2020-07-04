@@ -1,32 +1,39 @@
 " To install do:
-" $ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-" $ sudo apt get install exuberant-ctags
+" $ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+"     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+" git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+" ~/.fzf/install
+" $ git clone https://github.com/universal-ctags/ctags.git --depth=1
+" $ cd ctags
+" $ ./autogen.sh
+" $ ./configure
+" $ make
+" $ sudo make install
 " $ mkdir -p $HOME/.vim/undo
-
 
 set clipboard=exclude:.*
 set encoding=utf8
 set nocompatible
 filetype off
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+" set the runtime path to include fzf and vim-plug
+set rtp+=~/.fzf
+call plug#begin('~/.vim/plugged')
 
-Plugin 'scrooloose/nerdtree'
-Plugin 'majutsushi/tagbar'
-"Plugin 'vim-airline/vim-airline'
-Plugin 'ctrlpvim/ctrlp.vim'
-"Plugin 'chriskempson/base16-vim'
-Plugin 'ryanoasis/vim-devicons'
-"Plugin 'Valloric/YouCompleteMe'
-Plugin 'git://github.com/petRUShka/vim-opencl.git'
-Plugin 'ConradIrwin/vim-bracketed-paste'
-Plugin 'vim-syntastic/syntastic'
-Plugin 'scrooloose/nerdcommenter'
+Plug 'dense-analysis/ale'
+Plug 'itchyny/lightline.vim'
+Plug 'junegunn/fzf.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'natebosch/vim-lsc'
+Plug 'liuchengxu/vista.vim'
+Plug 'ryanoasis/vim-devicons'
+Plug 'git://github.com/petRUShka/vim-opencl.git'
+Plug 'ConradIrwin/vim-bracketed-paste'
+Plug 'scrooloose/nerdcommenter'
+Plug 'Valloric/ListToggle'
 
 " All of your Plugins must be added before the following line
-call vundle#end()            " required
+call plug#end()              " required
 filetype plugin indent on    " required
 
 set tabstop=4
@@ -47,20 +54,28 @@ set ruler
 set lazyredraw
 set rnu
 set cursorline
+set spell
 " set cursorcolumn
-set ttyfast
+" set ttyfast
+
+" Set highlights as underlines
+highlight Search ctermbg=black ctermfg=yellow cterm=underline
+highlight SpellBad ctermbg=black ctermfg=red cterm=underline
 
 au BufNewFile,BufRead *.rg set filetype=regent
-
-"hi CursorLine cterm=NONE ctermbg=59
-" hi CursorColumn cterm=NONE ctermbg=59
 filetype plugin on
 syntax on
 
-" NerdTree and TagBar settings
+" Toggle information/plugins
 map <C-n> :NERDTreeToggle<CR>
+nnoremap <C-t> :Vista!!<CR>
+nnoremap <C-p> :Files<Cr>
+nnoremap <C-y> :Vista finder<Cr>
+let g:lt_location_list_toggle_map = '<C-l>'
+let g:lt_quickfix_list_toggle_map = '<C-k>'
+
+" NerdTree configuration
 let g:NERDTreeDirArrows=1
-noremap <C-t> :TagbarToggle<CR>
 
 " Pane navigation mappings
 nnoremap J <C-W>j
@@ -79,29 +94,18 @@ if has("autocmd")
       au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 
-" CtrlP settings
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlPMixed'
-
 " Remember last changes
 if has('persistent_undo')      "check if your vim version supports it
     set undofile                 "turn on the feature
     set undodir=$HOME/.vim/undo  "directory where the undo files will be stored
 endif
 
-" Syntastic settings
-let g:syntastic_python_checkers = ['pycodestyle']
-" let g:syntastic_python_checkers = ['pylint']
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+" Lightline settings
+set laststatus=2
+let g:lightline = {
+      \ 'colorscheme': 'jellybeans',
+      \ }
 
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
-" Airline settings
-"set laststatus=2
-"let g:airline_powerline_fonts = 1
-"let g:airline#extensions#tabline#enabled = 1
+" ALE
+" let g:ale_linters = {'python': ['pycodestyle']}
+let g:ale_linters = {'python': ['pylint']}
