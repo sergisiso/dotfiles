@@ -58,6 +58,10 @@ set spell
 " set cursorcolumn
 " set ttyfast
 
+" Set highlights as underlines
+highlight Search ctermbg=black ctermfg=yellow cterm=underline
+highlight SpellBad ctermbg=black ctermfg=red cterm=underline
+
 filetype plugin on
 syntax on
 
